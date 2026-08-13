@@ -33,7 +33,10 @@ const SUPABASE_URL = 'https://fweopvnzjyowcpimspcc.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_CeMIJaXC5hb2Yz1IArNQXQ_nDe4qiRw';
 const app = document.getElementById('app');
 const homeBtn = document.getElementById('homeBtn');
-homeBtn.addEventListener('click',()=>{history.replaceState({},'',location.pathname);renderCreate();});
+homeBtn.addEventListener('click',()=>{
+  history.replaceState({},'',location.pathname);
+  renderHome();
+});
 
 async function rpc(name, payload={}){
   const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${name}`, {
