@@ -317,21 +317,30 @@ async function renderAdmin(slug,adminToken){
           <div style="min-width:150px">
             <label style="margin-bottom:4px">1인 최대 배치</label>
             <select id="adminMax" class="field">
-              <option value="2">2시간</option><option value="3">3시간</option><option value="4">4시간</option>
-              <option value="5">5시간</option><option value="6">6시간</option><option value="8">8시간</option><option value="0">제한 없음</option>
-            </select>
-          </div>
-          <div style="min-width:170px">
-            <label style="margin-bottom:4px">연속 최대 배치</label>
-            <select id="maxConsecutive" class="field">
               <option value="1">1시간</option>
-              <option value="2" selected>2시간</option>
+              <option value="2">2시간</option>
               <option value="3">3시간</option>
               <option value="4">4시간</option>
               <option value="5">5시간</option>
               <option value="6">6시간</option>
+              <option value="7">7시간</option>
+              <option value="8">8시간</option>
               <option value="0">제한 없음</option>
             </select>
+          </div>
+          <div style="min-width:170px">
+            <label style="margin-bottom:4px">연속 최대 배치</label>
+          <select id="maxConsecutive" class="field">
+            <option value="1">1시간</option>
+            <option value="2" selected>2시간</option>
+            <option value="3">3시간</option>
+            <option value="4">4시간</option>
+            <option value="5">5시간</option>
+            <option value="6">6시간</option>
+            <option value="7">7시간</option>
+            <option value="8">8시간</option>
+            <option value="0">제한 없음</option>
+          </select>
           </div>
           <label style="display:flex;align-items:center;gap:7px;margin:22px 0 0;white-space:nowrap">
             <input type="checkbox" id="preferConsecutive" checked>
