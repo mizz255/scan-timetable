@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Batchmate — 가능시간 수집 & 자동배치</title>
+  <title>Timetable Maker — 가능시간 수집 & 자동배치</title>
   <style>
     :root{--bg:#f7f7fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#ff6b6b;--accent2:#fff0f0;--ok:#10b981;--warn:#ef4444;--soft:#f3f4f6}
     *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--text)}
@@ -20,7 +20,7 @@
 <body>
   <div class="wrap">
     <div class="top">
-      <div class="brand"><div class="logo">B</div><div><h1>Batchmate</h1><div class="sub">가능시간 수집 → 자동배치 → 최종표 다운로드</div></div></div>
+      <div class="brand"><div class="logo">T</div><div><h1>Timetable Maker</h1><div class="sub">가능시간 수집 → 자동배치 → 최종표 다운로드</div></div></div>
       <button class="btn ghost" id="homeBtn">새 시간표 만들기</button>
     </div>
 
@@ -115,12 +115,12 @@ async function renderParticipant(slug){
     document.getElementById('clearAvail').addEventListener('click',()=>{selected.clear();document.querySelectorAll('.slot').forEach(x=>x.classList.remove('selected'));document.getElementById('countTxt').textContent='0칸 선택'});
     document.getElementById('loadMine').addEventListener('click',async()=>{
       const name=document.getElementById('pname').value.trim(); if(!name) return setStatus('pStatus','이름을 먼저 입력해주세요.','err');
-      const key=`batchmate:${slug}:${name}`; const et=localStorage.getItem(key); if(!et) return setStatus('pStatus','이 기기에는 이전 제출 기록이 없습니다.','info');
+      const key=`timetable-maker:${slug}:${name}`; const et=localStorage.getItem(key); if(!et) return setStatus('pStatus','이 기기에는 이전 제출 기록이 없습니다.','info');
       try{const r=await rpc('get_my_availability',{p_slug:slug,p_name:name,p_edit_token:et}); if(!r) throw new Error('이전 응답을 찾을 수 없습니다.'); selected.clear();r.slots.forEach(x=>selected.add(x));document.querySelectorAll('.slot').forEach(x=>x.classList.toggle('selected',selected.has(x.dataset.key)));document.getElementById('countTxt').textContent=`${selected.size}칸 선택`;setStatus('pStatus','이전 응답을 불러왔습니다. 수정 후 다시 제출할 수 있어요.','ok')}catch(e){setStatus('pStatus',e.message,'err')}
     });
     document.getElementById('submitAvail').addEventListener('click',async()=>{
       const name=document.getElementById('pname').value.trim(); if(!name)return setStatus('pStatus','이름을 입력해주세요.','err');
-      const key=`batchmate:${slug}:${name}`; let et=localStorage.getItem(key); if(!et){et=token();localStorage.setItem(key,et)}
+      const key=`timetable-maker:${slug}:${name}`; let et=localStorage.getItem(key); if(!et){et=token();localStorage.setItem(key,et)}
       try{await rpc('submit_availability',{p_slug:slug,p_name:name,p_edit_token:et,p_slots:[...selected]});setStatus('pStatus','제출 완료! 이제 이 창을 닫아도 됩니다.','ok')}catch(e){setStatus('pStatus',e.message,'err')}
     });
   }catch(e){app.innerHTML=`<div class="card"><div class="status err">${esc(e.message)}</div></div>`}
